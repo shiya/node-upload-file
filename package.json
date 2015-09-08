@@ -1,0 +1,15 @@
+{
+  "name": "node-upload-file",
+  "version": "1.0.0",
+  "description": "A simple app that demonstrates how to upload a file to Autodesk View and Data API with Node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "upload",
+    "autodesk"
+  ],
+  "author": "Shiya Luo",
+  "license": "MIT"
+}
