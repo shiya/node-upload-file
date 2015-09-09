@@ -1,14 +1,22 @@
 var https = require("https");
+var express = require("express");
+var formidable = require("formidable");
+var fs = require("fs");
 
-var token = "XZt4JnwJQqNQTvry2bPffDfWrSvK";
+var app = express();
+
+var token = "YOUR ACCESS TOKEN";
 var bucket = {};
-bucket.name = "shiyas-bucket-100";
+bucket.name = "YOUR BUCKET NAME";
 
-function uploadFile(file) {
-	
+function uploadFileOSS(file) {
+	if (!file) {
+		return;
+	}
+
 	var options = {
 		host: "developer.api.autodesk.com",
-		path: "/oss/v1/buckets/" + bucket.name + "/objects/" + "filename.txt",
+		path: "/oss/v1/buckets/" + bucket.name + "/objects/" + file.name,
 		method: "PUT", 
 		headers: {
 			"Content-Type": "application/octet-stream",
@@ -27,8 +35,31 @@ function uploadFile(file) {
 		});
 	});
 
-	uploadFileRequest.write(file);
-	uploadFileRequest.end();
+	fs.readFile(file.path, function (err, data){
+		uploadFileRequest.write(data);
+		uploadFileRequest.end();
+	});
 }
 
-uploadFile("sometext");
+app.get("/", function (req, res){
+	res.sendFile(__dirname + "/index.html");
+});
+
+app.post("/", function (req, res){
+	var form = new formidable.IncomingForm();
+	form.keepExtensions = true;
+
+	form.parse(req);
+
+	form.on("fileBegin", function (name, file){
+		file.path = __dirname + "/uploads/" + file.name;
+	});
+
+	form.on("file", function (name, file){
+		uploadFileOSS(file); // passes in a formidable file object
+	});
+
+	res.sendFile(__dirname + "/index.html");
+});
+
+app.listen(3000);

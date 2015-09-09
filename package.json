@@ -11,5 +11,10 @@
     "autodesk"
   ],
   "author": "Shiya Luo",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "formidable": "^1.0.17"
+  },
+  "devDependencies": {}
 }
