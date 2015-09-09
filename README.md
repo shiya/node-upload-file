@@ -2,9 +2,9 @@
 This is a very simple app that demonstrates how to upload a file twith Autodesk's View and Data API.
 
 ## Dependencies
-Node.js
-Express.js
-Formidable
+- Node.js
+- Express.js
+- Formidable
 
 ## Setup
 - If you haven't already, go register a developer account with Autodesk at http://developer.autodesk.com/
