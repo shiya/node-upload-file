@@ -17,7 +17,7 @@ function uploadFileOSS(file) {
 	var options = {
 		host: "developer.api.autodesk.com",
 		path: "/oss/v1/buckets/" + bucket.name + "/objects/" + file.name,
-		method: "PUT", 
+		method: "PUT",
 		headers: {
 			"Content-Type": "application/octet-stream",
 			"Authorization": "Bearer " + token
@@ -63,3 +63,4 @@ app.post("/", function (req, res){
 });
 
 app.listen(3000);
+console.log("Server running at port 3000");
